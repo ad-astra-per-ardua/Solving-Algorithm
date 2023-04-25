@@ -1,3 +1,4 @@
+
 ssd_dict = {
     '0': [' - ', '| |', '   ', '| |', ' - '],
     '1': ['   ', '  |', '   ', '  |', '   '],
@@ -12,13 +13,11 @@ ssd_dict = {
 }
 
 
-number = input()
+number = list(input().strip()) #Added strip() for sample2's input blank but in that case number gose to seperately used list() function
+
 height, width = map(int, input().split())
 
-"""
-함수 segment: num을 받아서, 가로를 width배, 세로를 height배 한 7-segment를 반환하는 함수
 
-"""
 def segment(num, height, width):
     result = [] # A list to return
 
@@ -32,16 +31,11 @@ def segment(num, height, width):
 
     return result
 
-"""
-segment 함수를 입력받은 문자열 내의 모든 글자에 대해 적용해주면 된다.
-"""
+
 results = []
 for num in number:
     results.append(segment(num, height, width))
 
-"""
-join 함수로 같은 줄에 있는 애들을 모두 합쳐서 한 줄로 만들어준다.
-이걸 모든 줄에 대해서 해준다.
-"""
+
 for i in range(len(results[0])):
-    print(" ".join(result[i] for result in results))
+    print(" ".join(result[i] for result in results)) #Added ' ' (blank) for same for sample output but discard.
