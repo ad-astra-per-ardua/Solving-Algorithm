@@ -1,4 +1,0 @@
-a = int(input())  #더 넣은 물의 양
-b = int(input())  #총 물의 양
-c = b - a
-print(c)
