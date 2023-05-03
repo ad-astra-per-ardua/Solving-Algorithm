@@ -1,5 +1,5 @@
 import sys
-for _ in range(3):  # 3개의 테스트 케이스를 반복합니다.
+for _ in range(3):
     n = int(int(sys.stdin.readline().strip()))
     a = 0
     for i in range(n):
