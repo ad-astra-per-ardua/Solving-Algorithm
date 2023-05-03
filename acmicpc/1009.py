@@ -1,7 +1,7 @@
 def answer_code(a, b):
     if b == 0:
         return 1
-    if a % 10 == 0 or b % 10 == 0:
+    if a % 10 == 0:
         return 10
 
     if a % 10 in (1, 5, 6):
