@@ -1,19 +1,26 @@
-import sys
+def matrix_chain_order(matrices):
+    n = len(matrices)
+    m = [[0] * n for _ in range(n)]
 
-n = int(sys.stdin.readline().rstrip())
-matrix_sizes = []
-for _ in range(n):
-    r, c = map(int, sys.stdin.readline().rstrip().split())
-    matrix_sizes.append((r, c))
+    def cost(i, j, k):
+        return matrices[i][0] * matrices[k][1] * matrices[j][1]
 
-dp = [[float('inf')] * n for _ in range(n)]
-for i in range(n):
-    dp[i][i] = 0
+    def hu_shing_algorithm(i, j):
+        if m[i][j] > 0:
+            return m[i][j]
+        if i == j:
+            m[i][j] = 0
+        else:
+            m[i][j] = float('inf')
+            for k in range(i, j):
+                q = hu_shing_algorithm(i, k) + hu_shing_algorithm(k + 1, j) + cost(i, k, j)
+                if q < m[i][j]:
+                    m[i][j] = q
+        return m[i][j]
 
-for k in range(1, n):
-    for i in range(n - k):
-        j = i + k
-        for m in range(i, j):
-            dp[i][j] = min(dp[i][j], dp[i][m] + dp[m+1][j] + matrix_sizes[i][0] * matrix_sizes[m][1] * matrix_sizes[j][1])
+    return hu_shing_algorithm(0, n - 1)
 
-print(dp[0][n-1])
+N = int(input())
+matrices = [list(map(int, input().split())) for _ in range(N)]
+
+print(matrix_chain_order(matrices))
