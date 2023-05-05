@@ -1,6 +1,9 @@
+# Inspired by juno's hu-shing.cpp and Computation of matrix chain products by Hu and Shing
+# Original source from https://github.com/junodeveloper/Hu-Shing
+
 import heapq
 from collections import deque
-
+import sys
 
 class Val:
     ide = 0
@@ -105,7 +108,7 @@ class HuShing:
             self.cp[i] = self.w[i] * self.w[i - 1]
             self.cp[i] += self.cp[i - 1]
 
-    def mnmul(self, node):
+    def module(self, node):
         if node == 1:
             return self.w[1] * self.w[2] + self.w[1] * self.w[self.n]
         cur = self.arcs[node]
@@ -152,7 +155,7 @@ class HuShing:
             self.n_pqs += 1
             self.qid[node] = self.n_pqs
             cur.den = cur.base
-            cur.num = self.w[cur.low] * (cur.den + cur.mul - self.mnmul(node))
+            cur.num = self.w[cur.low] * (cur.den + cur.mul - self.module(node))
             self.add_arc(node, cur)
             return
         cur.den = cur.base
@@ -160,14 +163,14 @@ class HuShing:
             self.dfs(it)
             self.sub[node] += self.sub[it]
             cur.den -= self.arcs[it].base
-        cur.num = self.w[cur.low] * (cur.den + cur.mul - self.mnmul(node))
+        cur.num = self.w[cur.low] * (cur.den + cur.mul - self.module(node))
         self.merge_pq(node)
         cur_pq = self.pqs[self.qid[node]]
         while cur_pq and cur_pq[0].support() >= self.w[cur.low]:
             hm = cur_pq[0]
             cur.den += hm.den
             self.remove_arc(node)
-            cur.num = self.w[cur.low] * (cur.den + cur.mul - self.mnmul(node))
+            cur.num = self.w[cur.low] * (cur.den + cur.mul - self.module(node))
 
         while cur_pq and cur >= cur_pq[0]:
             hm = cur_pq[0]
@@ -192,12 +195,12 @@ class HuShing:
         return self.answer()
 
 
-n = int(input())
+n = int(sys.stdin.readline())
 arr = []
-for i in list(map(int, input().split())):
+for i in list(map(int, sys.stdin.readline().split())):
     arr.append(i)
 for _ in range(1, n):
-    a, tmp = map(int, input().split())
+    a, tmp = map(int, sys.stdin.readline().split())
     arr.append(tmp)
 hsing = HuShing(arr)
 print(hsing.solve())
