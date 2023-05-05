@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(10**9)
+
 def matrix_chain_order(matrices):
     n = len(matrices)
     m = [0] * n
@@ -19,7 +19,7 @@ def matrix_chain_order(matrices):
 
     return hu_shing_algorithm(0, n - 1)
 
-N = int(input())
-matrices = [list(map(int, input().split())) for _ in range(N)]
+N = int(sys.stdin.readline())
+matrices = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
 
 print(matrix_chain_order(matrices))
