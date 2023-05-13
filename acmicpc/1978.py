@@ -1,17 +1,15 @@
-def prime_num(num):
-    if num < 2:
-        return False
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
-            return False
-    return True
+import math,sys
+input = sys.stdin.readline
+loop = int(input())
+temp = 0
+lists = list(map(int,input().split()))
+for i in lists:
+    if i == 1:
+        continue
+    for e in range(2, i):
+        if i % e == 0:
+            break
+    else:
+        temp += 1
 
-b = int(input())
-a = list(map(int, input().split()))
-
-prime_count = 0
-for num in a:
-    if prime_num(num):
-        prime_count += 1
-
-print(prime_count)
+print(temp)
