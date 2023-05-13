@@ -1,27 +1,20 @@
-def min_squares_to_repaint(N, M, board):
-    min_repaints = float('inf')
+a, b = map(int, input().split())
 
-    for start_row in range(N - 7):
-        for start_col in range(M - 7):
-            repaints1 = 0
-            repaints2 = 0
-            for row in range(start_row, start_row + 8):
-                for col in range(start_col, start_col + 8):
-                    if (row + col) % 2 == 0:
-                        if board[row][col] == 'B':
-                            repaints1 += 1
-                        else:
-                            repaints2 += 1
+lists = [list(input().strip()) for _ in range(a)]
+min_changes = float('inf')
+
+for x in range(a - 7):
+    for y in range(b - 7):
+        for start_color in ('W', 'B'):
+            count = 0
+            for i in range(x, x + 8):
+                for j in range(y, y + 8):
+                    if (i + j) % 2 == 0:
+                        if lists[i][j] != start_color:
+                            count += 1
                     else:
-                        if board[row][col] == 'W':
-                            repaints1 += 1
-                        else:
-                            repaints2 += 1
-            min_repaints = min(min_repaints, repaints1, repaints2)
+                        if lists[i][j] == start_color:
+                            count += 1
+            min_changes = min(min_changes, count)
 
-    return min_repaints
-N, M = map(int,(input().split()))
-board = [input() for _ in range(N)]
-
-result = min_squares_to_repaint(N, M, board)
-print(result)
+print(min_changes)
