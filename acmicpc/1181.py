@@ -1,20 +1,9 @@
-n = int(input())
-count = 0
+import sys
+loop = int(sys.stdin.readline())
+lists = []
 
-for _ in range(n):
-    word = input().strip()
-    prev_char = ''
-    used_chars = set()
-
-    for char in word:
-        if char != prev_char:
-            if char in used_chars:
-                break
-            used_chars.add(prev_char)
-            prev_char = char
-        else:
-            continue
-    else:
-        count += 1
-
-print(count)
+for _ in range(loop):
+    lists.append(sys.stdin.readline().strip())
+ans = sorted(set(lists), key=lambda x: (len(x), x))
+for i in range(len(ans)):
+    print(ans[i])
