@@ -1,4 +1,4 @@
-from collections import deque
+from collections import *
 import sys,time
 
 n = int(sys.stdin.readline().strip())
