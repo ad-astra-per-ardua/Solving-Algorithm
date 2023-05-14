@@ -1,9 +1,12 @@
-import math
 a = int(input())
-counts = 0
+stack = 0
 while True:
-    if a % 5 != 0:
-        if a % 3 == 0:
-            counts += (a / 3)
-
-
+    if a % 5 == 0:
+        stack += a // 5
+        print(stack)
+        break
+    elif a<= 0:
+        print(-1)
+        break
+    a -= 3
+    stack += 1
