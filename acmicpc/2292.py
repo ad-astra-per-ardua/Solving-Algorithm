@@ -1,10 +1,11 @@
-a = int(input())
-floor = 1
-bee_house = 1
-
-while True:
-    if a <= bee_house:
-        break
-    floor += 1
-    bee_house += 6 * (floor - 1)
-print(floor)
+import sys
+a = int(sys.stdin.readline().strip())
+ans = 1
+if a == 1:
+    print('1')
+else:
+    for i in range(a):
+        ans += 6 * i
+        if ans >= a:
+            break
+    print(i+1)
