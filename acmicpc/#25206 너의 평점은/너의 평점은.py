@@ -1,7 +1,5 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
-
 grade_dict = {
     "A+": 4.5,
     "A0": 4.0,
@@ -13,32 +11,20 @@ grade_dict = {
     "D0": 1.0,
     "F": 0.0
 }
-score = deque()
-grade = deque()
-
+a = []
+b = []
 for _ in range(20):
-    a = input().split()
-    score.append(float(a[1]))
-    grade.append(a[2])
-temp = deque()
-for i in range(len(grade)):
-    if grade[i] == 'P':
-        temp.append(i)
+    trash, a_val, b_val = input().split()
+    if b_val == 'P':
+        continue
+    a.append(float(a_val))
+    b.append(b_val)
+temp = []
+for i in range(len(a)):
+    temp2 = a[i] * grade_dict[b[i]]
+    temp.append(temp2)
+fin_sum = sum(temp)
+avg_for = sum(a)
+ans = round(fin_sum / avg_for,6)
 
-grade_point_notP = deque()
-score_point_notP = deque()
-for e in range(len(score)):
-    if e not in temp:
-        grade_point_notP.append(grade[e])
-        score_point_notP.append(score[e])
-
-tot_grade = deque()
-for j in range(len(grade_point_notP)):
-    tot_grade.append(grade_dict[grade_point_notP[j]] * score_point_notP[j])
-
-total_fin_grade = sum(tot_grade)
-dis = sum(score_point_notP)
-
-ans = total_fin_grade / dis
-
-print(f"{round(ans,6):.6f}")
+print(f"{ans:.6f}")
