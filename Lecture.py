@@ -1,12 +1,25 @@
-a,b = map(int, input().split())
+import sys
 
-temp1 = int(str(a),2)
-temp2 = int(str(b),2)
+input = sys.stdin.readline
 
-ans_temp = temp1 + temp2
-if bin(ans_temp)[2] == 0:
-    ans = bin(ans_temp)[3:]
-else:
-    ans = bin(ans_temp)[2:]
+loop = int(input())
+paper = []
+temp = []
+overlap = []
 
-print(ans)
+
+for _ in range(loop):
+    a, b = map(int, input().split())
+    paper.append((a, b))
+    for _ in range(1):
+        paper.append((a + 10, b + 10))
+
+
+for i in range(len(paper)):
+    a, b = paper[i // 2 - 1]
+    if
+
+
+print(paper)
+print(len(paper))
+print(a,b)
