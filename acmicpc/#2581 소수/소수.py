@@ -15,7 +15,7 @@ for i in range(m,n+1):
                 break
         else:
             prime.append(i)
-set(prime)
+
 if len(prime) <= 0:
     print('-1')
 else:
