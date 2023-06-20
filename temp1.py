@@ -1,26 +1,30 @@
-import sys
-from collections import defaultdict
+import math
 
-sys.setrecursionlimit(10**6)
+sign = [0] * 40558
+sign[1] = 1
 
-def main():
-    N = int(input())
-    A = list(map(int, input().split()))
-    A = sorted(A)
-    C = defaultdict(int)
-    C[A[0]] += 1
-    C[A[-1]] += 1
-    for a in A[1:-1]:
-        C[a] += 2
-    ans = -1
-    for i in range(1, A[-1] - A[0] + 1):
-        if C[i] == 0:
-            ans = i
-            break
-    if ans == -1:
-        print(-1)
-    else:
-        print(ans)
+def sign_precompute():
+    global sign
+    for i in range(1, 40558):
+        for j in range(2 * i, 40558, i):
+            sign[j] -= sign[i]
+
+def Q(x):
+    global sign
+    ans = 0
+    for i in range(1, int(math.sqrt(x)) + 1):
+        ans += sign[i] * (x // (i * i))
+    return ans
 
 if __name__ == "__main__":
-    main()
+    sign_precompute()
+    k = int(input().strip())
+    s, e, ans = 1, 1644934081, 1644934081
+    while s <= e:
+        m = s + (e - s) // 2
+        if Q(m) < k:
+            s = m + 1
+        else:
+            e = m - 1
+            ans = m
+    print(ans)

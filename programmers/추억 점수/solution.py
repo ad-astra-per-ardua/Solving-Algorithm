@@ -1,3 +1,5 @@
+// [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/176963
+
 def solution(name, yearning, photo):
     answer = []
     name_yearning_dict = dict(zip(name, yearning))

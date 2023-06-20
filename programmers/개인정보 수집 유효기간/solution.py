@@ -1,3 +1,5 @@
+// [문제 링크]: https://school.programmers.co.kr/learn/courses/30/lessons/150370
+
 def solution(today, terms, privacies):
     today_year, today_month, today_day = map(int, today.split('.'))
     terms_dict = {}
