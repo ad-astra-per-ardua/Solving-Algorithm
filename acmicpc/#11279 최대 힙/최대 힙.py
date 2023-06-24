@@ -11,7 +11,7 @@ for _ in range(n):
         if integer == 0:
             print(hp.heappop(heap)[1])
         else:
-            hp.heappush(heap,(abs(integer),integer))
+            hp.heappush(heap,(-integer,integer))
     except IndexError:
         print(0)
         continue
