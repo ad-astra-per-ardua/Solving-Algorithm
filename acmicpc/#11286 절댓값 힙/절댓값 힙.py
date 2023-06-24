@@ -1,13 +1,17 @@
-import sys, heapq
+import heapq as hp
+import sys
+input = sys.stdin.readline
 
-abs_heap = []
-n = int(sys.stdin.readline())
-for i in range(n):
-    num = int(sys.stdin.readline())
-    if num:
-        heapq.heappush(abs_heap, (abs(num), num))
-    else:
-        if abs_heap:
-            print(heapq.heappop(abs_heap)[1])
+heap = []
+n = int(input().rstrip())
+
+for _ in range(n):
+    try:
+        integer = int(input().rstrip())  # if n is int = heappush, n is 0 = heappop and if is in nothing, print 0
+        if integer == 0:
+            print(hp.heappop(heap)[1])
         else:
-            print(0)
+            hp.heappush(heap,(abs(integer),integer))
+    except IndexError:
+        print(0)
+        continue
