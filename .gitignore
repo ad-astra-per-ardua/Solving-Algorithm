@@ -1,9 +1,10 @@
 /.github/
-/Lecture.py
-/Running_time_checker.py
-/temp1.py
-/temp.py
-/spec-file.txt
+/temp/Lecture.py
+/temp/Running_time_checker.py
+/temp/temp1.py
+/temp/temp.py
+/temp/spec-file.txt
 /.idea/sonarlint/issuestore/9/6/967ee82a1adbcb0f404ca9ecf80d33f031f35ee5
 /.idea/sonarlint/securityhotspotstore/9/6/967ee82a1adbcb0f404ca9ecf80d33f031f35ee5
 /.idea/git_toolbox_prj.xml
+/temp/
