@@ -1,53 +1,59 @@
-from itertools import combinations
-from collections import *
-import sys, copy
-input = sys.stdin.readline
+import unittest
+from temp.GraphModule import GraphModule, GraphModuleState, GraphModulePort, GraphModulePortType, GraphModulePortTarget
 
-safe = []
-hazard = []
-ans = 0
-direction_x = [-1, 0, 1, 0]
-direction_y = [0, 1, 0, -1]
+class TestGraphModule(unittest.TestCase):
+    def test_init_with_values(self):
+        port1 = GraphModulePort(0, GraphModulePortType.INPUT_NET, GraphModulePortTarget(0))
+        port2 = GraphModulePort(1, GraphModulePortType.OUTPUT_NET, GraphModulePortTarget(1))
+        gm = GraphModule(1, ports=[port1, port2], vars=["var1", "var2"])
+        self.assertEqual(gm.state, GraphModuleState.UNINITIALIZED)
+        self.assertEqual(gm.id, 1)
+        self.assertEqual(gm.graph, None)
+        self.assertEqual(gm.vars, ["var1", "var2"])
+        self.assertEqual(gm.ports, [port1, port2])
 
-n, m = map(int, input().split())
-graph = [list(map(int, input().split())) for _ in range(n)]
-# 기본세팅
+    def test_mark_dirty(self):
+        gm = GraphModule(1)
+        gm.mark_dirty()
+        self.assertEqual(gm.state, GraphModuleState.DIRTY)
 
-def bfs(temp):
-    global ans
-    count = len(safe) - 3
-    array = deque([])
-    for x, y in hazard:
-        array.append((x, y))
-    while array:
-        nowx, nowy = array.popleft()
-        for i in range(4):
-            nextx = nowx + direction_x[i]
-            nexty = nowy + direction_y[i]
-            if 0 <= nextx<n and 0 <= nexty<m and temp[nextx][nexty] == 0:
-                temp[nextx][nexty] = 2
-                array.append((nextx, nexty))
-                count -= 1
-    ans = max(ans, count)
+    def test_numbering_ports_with_different_base(self):
+        port1 = GraphModulePort(0, GraphModulePortType.INPUT_NET, GraphModulePortTarget(0))
+        port2 = GraphModulePort(1, GraphModulePortType.OUTPUT_NET, GraphModulePortTarget(1))
+        gm = GraphModule(1, ports=[port1, port2])
+        gm.numbering_ports(100)
+        self.assertEqual(gm.ports[0].id, 100)
+        self.assertEqual(gm.ports[1].id, 101)
+        self.assertEqual(gm.state, GraphModuleState.INITIALIZED)
+    def test_init(self):
+        gm = GraphModule(id=1)
+        self.assertEqual(gm.state, GraphModuleState.UNINITIALIZED)
+        self.assertEqual(gm.id, 1)
+        self.assertEqual(gm.graph, None)
+        self.assertEqual(gm.instances, [])
+        self.assertEqual(gm.vars, [])
+        self.assertEqual(gm.ports, [])
 
+    def test_from_instances(self):
+        gm1 = GraphModule(1)
+        gm2 = GraphModule(2)
+        gm = GraphModule.from_instances(id=3, instances=[gm1, gm2])
+        self.assertEqual(gm.id, 3)
+        self.assertEqual(gm.instances, [gm1, gm2])
 
-for i in range(n):
-    for j in range(m):
-        if graph[i][j] == 0:
-            safe.append((i,j))
-        elif graph[i][j] == 2:
-            hazard.append((i,j))
-# safe(0)와 hazard(2)부분의 좌표를 각각의 리스트에 저장
+    def test_check_init(self):
+        gm = GraphModule(0)
+        with self.assertRaises(Exception):
+            gm.check_init()
 
+    def test_numbering_ports(self):
+        port1 = GraphModulePort(0, GraphModulePortType.INPUT_NET, GraphModulePortTarget(0))
+        port2 = GraphModulePort(0, GraphModulePortType.OUTPUT_NET, GraphModulePortTarget(1))
+        gm = GraphModule(0, ports=[port1, port2])
+        gm.numbering_ports(10)
+        self.assertEqual(gm.ports[0].id, 10)
+        self.assertEqual(gm.ports[1].id, 11)
+        self.assertEqual(gm.state, GraphModuleState.INITIALIZED)
 
-for com in combinations(safe,3):
-    temp = copy.deepcopy(graph)
-    for x,y in com:
-        temp[x][y] = 1
-    bfs(temp)
-
-# 이후 조합을 이용해 safe 리스트에서 3개의 원소를 선택하는 모든조합을 생성
-# 각 조합에 대해 deepcopy를 사용해서 복사된 행렬에 벽(1)을 세우고 그다음 2를 퍼뜨린후
-# ans = max(ans, count)로 max값을 뽑아낸뒤 답을 출력
-
-print(ans)
+if __name__ == "__main__":
+    unittest.main()
