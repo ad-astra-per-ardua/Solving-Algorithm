@@ -1,0 +1,1 @@
+n=m=gets.to_i;a=i=e=0;(1..n).each{|s|while i<m&&e<n;e+=1;i+=e;end;a+=1 if i==m;i-=s};puts a
