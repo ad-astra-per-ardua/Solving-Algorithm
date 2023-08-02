@@ -1,10 +1,10 @@
 # [level 4] 가사 검색 - 60060 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/60060?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/60060?language=cpp) 
 
 ### 성능 요약
 
-메모리: 1.34 GB, 시간: 9098.22 ms
+메모리: 682 MB, 시간: 993.86 ms
 
 ### 구분
 
