@@ -1,8 +1,0 @@
-class Solution:
-    def firstPalindrome(self, words: List[str]) -> str:
-        for i in words:
-            temp = list(i)
-            if temp[0:] == temp[::-1]:
-                return i
-        return ""
- 
