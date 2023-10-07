@@ -15,16 +15,12 @@ def stdstr(): return stdin.readline()
 mod = 1_000_000_007
 # sys.setrecursionlimit(100_000_000)
 input = lambda: stdstr().strip()
-# main code goes here
+T = int(input())
 
-count = 0
-N, M = map(int, input().split())
-s = set()
-for _ in range(N):
-    s.add(input().rstrip())
-for _ in range(M):
-    checker = set(input().rsplit())
-    if set(checker) & s:
-        count += 1
-
-print(count)
+for _ in range(T):
+    N, M = map(int, input().split())
+    
+    if N <= 2 or M <= 2 or (N % 2 == 1 and M % 2 == 1):
+        print("First")
+    else:
+        print("Second")

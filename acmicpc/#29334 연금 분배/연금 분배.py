@@ -17,14 +17,26 @@ mod = 1_000_000_007
 input = lambda: stdstr().strip()
 # main code goes here
 
-count = 0
-N, M = map(int, input().split())
-s = set()
-for _ in range(N):
-    s.add(input().rstrip())
-for _ in range(M):
-    checker = set(input().rsplit())
-    if set(checker) & s:
-        count += 1
+def main():
+    n = int(input())
+    q = [0.0] + list(map(float, input().split()))
+    r = [0.0] + list(map(float, input().split()))
 
-print(count)
+    prefix_sum = [0.0] * (n + 1)
+
+    for i in range(1, n + 1):
+        prefix_sum[i] = prefix_sum[i - 1] + r[i]
+
+    ret = [0.0] * (n + 1)
+    total = 0.0
+
+    for i in range(1, n + 1):
+        ret[i] = q[i] / (prefix_sum[n] - prefix_sum[i - 1])
+        total += ret[i]
+
+    for i in range(1, n + 1):
+        print("{:.6f}".format(ret[i] / total), end=" ")
+    print()
+
+if __name__ == "__main__":
+    main()

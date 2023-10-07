@@ -15,16 +15,16 @@ def stdstr(): return stdin.readline()
 mod = 1_000_000_007
 # sys.setrecursionlimit(100_000_000)
 input = lambda: stdstr().strip()
-# main code goes here
+############## main code goes here ##############
 
-count = 0
-N, M = map(int, input().split())
-s = set()
-for _ in range(N):
-    s.add(input().rstrip())
-for _ in range(M):
-    checker = set(input().rsplit())
-    if set(checker) & s:
-        count += 1
+def main():
+    n, k = map(int, input().split())
 
-print(count)
+    print("a" * (n - k), end="")
+
+    for i in range(k):
+        print(chr(ord('a') + i), end="")
+    print()
+
+if __name__ == "__main__":
+    main()

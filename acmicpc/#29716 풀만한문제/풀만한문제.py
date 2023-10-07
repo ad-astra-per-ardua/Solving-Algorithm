@@ -12,19 +12,33 @@ def ceildiv(x, d): return x//d if(x % d == 0) else x//d+1
 def flush(): return stdout.flush()
 def stdstr(): return stdin.readline()
 
-mod = 1_000_000_007
+MOD = 1_000_000_007
 # sys.setrecursionlimit(100_000_000)
 input = lambda: stdstr().strip()
-# main code goes here
+############## main code goes here ##############
+def main():
+    j, n = map(int, input().split())
 
-count = 0
-N, M = map(int, input().split())
-s = set()
-for _ in range(N):
-    s.add(input().rstrip())
-for _ in range(M):
-    checker = set(input().rsplit())
-    if set(checker) & s:
-        count += 1
+    cnt = 0
 
-print(count)
+    for _ in range(n):
+        s = input().strip()
+
+        val = 0
+
+        for c in s:
+            if 'A' <= c <= 'Z':
+                val += 4
+            elif 'a' <= c <= 'z' or '0' <= c <= '9':
+                val += 2
+            else:
+                val += 1
+
+        if val <= j:
+            cnt += 1
+
+    print(cnt)
+
+
+if __name__ == "__main__":
+    main()
