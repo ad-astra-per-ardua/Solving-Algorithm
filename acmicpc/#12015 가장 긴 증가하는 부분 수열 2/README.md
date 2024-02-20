@@ -1,8 +1,8 @@
-#  [가장 긴 증가하는 부분 수열 2](https://www.acmicpc.net/problem/12015) 
+# <img width="20px"  src="https://d2gd6pc034wcta.cloudfront.net/tier/14.svg" class="solvedac-tier"> [가장 긴 증가하는 부분 수열 2](https://www.acmicpc.net/problem/12015) 
 
 | 제출 번호 | 닉네임 | 채점 결과 | 메모리 | 시간 | 언어 | 코드 길이 |
 |---|---|---|---|---|---|---|
-|63353450|per_ardua_ad_astra|맞았습니다!! |257336KB|600ms|PyPy3|297B|
+|73709753|per_ardua_ad_astra|맞았습니다!! |12200KB|156ms|C++20|599B|
 
 ## 문제
 <p>수열 A가 주어졌을 때, 가장 긴 증가하는 부분 수열을 구하는 프로그램을 작성하시오.</p>
